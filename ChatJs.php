@@ -12,7 +12,7 @@ use Yii;
 use yii\web\AssetBundle;
 
 /**
- * @author Alexander Stepanov <student_vmk@mail.ru>
+ * @author Andy Fitria <sintret@gmail.com>
  */
 class ChatJs extends AssetBundle {
 
