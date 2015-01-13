@@ -1,7 +1,13 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
+$(".btn-send-comment").on("click", function () {
+    var message = $("#chat_message").val();
+    var url = $(this).data("url");
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: {message: message},
+        success: function (html) {
+            $("#chat_message").val("");
+            $("#chat-data").html(html);
+        }
+    });
+})

@@ -35,6 +35,10 @@ class Chat extends \yii\db\ActiveRecord {
             [['message'], 'string', 'max' => 128]
         ];
     }
+    
+    public function getUser() {
+        return $this->hasOne(User::className(), ['id' => 'userCreate']);
+    }
 
     /**
      * @inheritdoc
@@ -74,7 +78,7 @@ class Chat extends \yii\db\ActiveRecord {
     }
 
     public static function records() {
-        return static::find()->orderBy('id desc')->all;
+        return static::find()->orderBy('id desc')->all();
     }
 
 }
