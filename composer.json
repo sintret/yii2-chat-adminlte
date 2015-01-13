@@ -1,0 +1,37 @@
+{
+    "name": "sintret/yii2-chat-adminlte",
+    "description": "Yii2 extension for Chat plugin with admin lte",
+    "keywords": [
+        "yii2",
+        "adminlte",
+        "chat",
+        "jQuery",
+        "plugin",
+        "ajax"
+    ],
+    "type": "yii2-extension",
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/nirvana-msu/yii2-showloading/issues",
+        "source": "https://github.com/nirvana-msu/yii2-showloading"
+    },
+    "authors": [
+        {
+            "name": "Andy Fitria",
+            "homepage": "http://sintret.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "sintret\\chat-adminlte\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}
