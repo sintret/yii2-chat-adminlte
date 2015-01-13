@@ -12,8 +12,8 @@
     "type": "yii2-extension",
     "license": "MIT",
     "support": {
-        "issues": "https://github.com/nirvana-msu/yii2-showloading/issues",
-        "source": "https://github.com/nirvana-msu/yii2-showloading"
+        "issues": "https://github.com/sintret/yii2-chat-adminlte/issues",
+        "source": "https://github.com/sintret/yii2-chat-adminlte"
     },
     "authors": [
         {
@@ -26,7 +26,7 @@
     },
     "autoload": {
         "psr-4": {
-            "sintret\\chat-adminlte\\": ""
+            "sintret\\chat\\": ""
         }
     },
     "extra": {
