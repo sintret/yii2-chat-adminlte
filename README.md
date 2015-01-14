@@ -16,11 +16,10 @@ You just add table chat to your database with this :
 </pre>
 <p>
 and calling the widget in the view :
-<pre><div class="row">
+<pre>
     <section class="col-lg-9 connectedSortable ui-sortable">                                    
         <?= \sintret\chat\ChatRoom::widget(['url'=>  \yii\helpers\Url::to(['/chat/send-chat'])]); ?>
     </section>
-    </div>
 </pre>
 </p>
 
