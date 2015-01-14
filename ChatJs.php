@@ -17,10 +17,8 @@ use yii\web\AssetBundle;
 class ChatJs extends AssetBundle {
 
     public $sourcePath = '@vendor/sintret/yii2-chat-adminlte/assets';
-    public $css = [
-    ];
-    public $js = [ // Configured conditionally (source/minified) during init()
-        'js/chat.css',
+    public $js = [
+        'js/chat.js',
     ];
     public $depends = [
         'yii\web\JqueryAsset',
