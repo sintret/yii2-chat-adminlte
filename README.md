@@ -15,13 +15,13 @@ You just add table chat to your database with this :
 ) ENGINE=INNODB;
 </pre>
 <p>
-and calling the widget in the view like this :
-<?= \sintret\chat\ChatRoom::widget(['url'=>  \yii\helpers\Url::to(['/chat/send-chat'])]); ?>
+and calling the widget in the view :
+<pre><?= \sintret\chat\ChatRoom::widget(['url'=>  \yii\helpers\Url::to(['/chat/send-chat'])]); ?></pre>
 </p>
 
 <p>in your controller eg ChatController action sendChat</p>
 
-<code>
+<pre>
 public function actionSendChat() {
         $message = $_POST['message'];
         if ($message) {
@@ -35,4 +35,4 @@ public function actionSendChat() {
             }
         }
     }
-</code>
+</pre>
