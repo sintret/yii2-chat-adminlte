@@ -10,10 +10,8 @@ use app\models\User;
  *
  * @property integer $id
  * @property string $message
- * @property integer $userCreate
- * @property integer $userUpdate
+ * @property integer $userId
  * @property string $updateDate
- * @property string $createDate
  */
 class Chat extends \yii\db\ActiveRecord {
 
@@ -30,14 +28,13 @@ class Chat extends \yii\db\ActiveRecord {
     public function rules() {
         return [
             [['message'], 'required'],
-            [['userCreate', 'userUpdate'], 'integer'],
-            [['updateDate', 'createDate'], 'safe'],
-            [['message'], 'string', 'max' => 128]
+            [['userId'], 'integer'],
+            [['updateDate', 'message'], 'safe']
         ];
     }
-    
+
     public function getUser() {
-        return $this->hasOne(User::className(), ['id' => 'userCreate']);
+        return $this->hasOne(User::className(), ['id' => 'userId']);
     }
 
     /**
@@ -47,34 +44,14 @@ class Chat extends \yii\db\ActiveRecord {
         return [
             'id' => 'ID',
             'message' => 'Message',
-            'userCreate' => 'User Create',
-            'userUpdate' => 'User Update',
+            'userId' => 'User',
             'updateDate' => 'Update Date',
-            'createDate' => 'Create Date',
         ];
     }
 
     public function beforeSave($insert) {
-        if ($this->isNewRecord) {
-            $this->createDate = date('Y-m-d H:i:s');
-            $this->userCreate = Yii::$app->user->id;
-            $this->userUpdate = Yii::$app->user->id;
-        } else {
-            $this->updateDate = date('Y-m-d H:i:s');
-            $this->userUpdate = Yii::$app->user->id;
-        }
+        $this->userId = Yii::$app->user->id;
         return parent::beforeSave($insert);
-    }
-
-    public function getUserCreateLabel() {
-
-        $user = User::find()->select('username')->where(['id' => $this->userCreate])->one();
-        return $user->username;
-    }
-
-    public function getUserUpdateLabel() {
-        $user = User::find()->select('username')->where(['id' => $this->userUpdate])->one();
-        return $user->username;
     }
 
     public static function records() {

@@ -53,7 +53,7 @@ class ChatRoom extends Widget {
                             <div class="input-group">
                                 <input name="Chat[message]" id="chat_message" placeholder="Type message..." class="form-control">
                                 <div class="input-group-btn">
-                                    <button class="btn btn-success btn-send-comment" data-url="'.Yii::$app->urlManager->createUrl('chat/send-chat').'"><i class="fa fa-plus"></i></button>
+                                    <button class="btn btn-success btn-send-comment" data-url="'.$this->url.'"><i class="fa fa-plus"></i></button>
                                 </div>
                             </div>
                         </div>
