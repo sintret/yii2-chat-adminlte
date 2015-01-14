@@ -41,5 +41,5 @@ public function actionSendChat() {
     }
 </pre>
 
-you need attribute avatarImage in model User, which avatarImage is image source
+you need attribute avatarImage in model User, which avatarImage is image source. btw default image for avatar is available too
  
