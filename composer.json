@@ -23,7 +23,8 @@
         }
     ],
     "require": {
-        "yiisoft/yii2": "*"
+        "yiisoft/yii2": "*",
+        "kartik-v/yii2-helpers": "dev-master"
     },
     "minimum-stability": "dev",
     "autoload": {
