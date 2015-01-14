@@ -7,7 +7,7 @@ $(".btn-send-comment").on("click", function () {
         data: {message: message},
         success: function (html) {
             $("#chat_message").val("");
-            $("#chat-data").html(html);
+            $("#chat-box").html(html);
         }
     });
-})
+});
