@@ -67,8 +67,11 @@ class ChatRoom extends Widget {
         $models = Chat::records();
         if($models)
             foreach ($models as $model){
+                if(isset($model->user->avatarImage)){
+                    $avatar = $model->user->avatarImage;
+                } else $avatar = Yii::getAlias("@vendor/sintret/yii2-chat-adminlte/assets/img/avatar.png");
                 $output .= '<div class="item">
-                <img class="online" alt="user image" src="'.Yii::getAlias($model->user->avatar).'">
+                <img class="online" alt="user image" src="'.$avatar.'">
                 <p class="message">
                     <a class="name" href="#">
                         <small class="text-muted pull-right" style="color:green"><i class="fa fa-clock-o"></i> '.\kartik\helpers\Enum::timeElapsed($model->updateDate).'</small>
