@@ -13,9 +13,9 @@ function reloadchat(message, clearChat) {
     });
 }
 setInterval(function () {
-    reloadchat('', false)
+    reloadchat('', false);
 }, 2000);
 $(".btn-send-comment").on("click", function () {
     var message = $("#chat_message").val();
-    reloadChat(message, true);
+    reloadchat(message, true);
 });
