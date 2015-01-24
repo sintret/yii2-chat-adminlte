@@ -55,7 +55,7 @@ class Chat extends \yii\db\ActiveRecord {
     }
 
     public static function records() {
-        return static::find()->orderBy('id desc')->all();
+        return static::find()->orderBy('id desc')->limit(10)->all();
     }
 
 }
