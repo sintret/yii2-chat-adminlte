@@ -24,9 +24,4 @@ class ChatJs extends AssetBundle {
         'yii\web\JqueryAsset',
     ];
 
-    public function init() {
-        parent::init();
-        $this->js[] = YII_DEBUG ? 'js/chat.js' : 'js/chat.min.js';
-    }
-
 }
