@@ -18,7 +18,11 @@ You just add table chat to your database with this :
 and calling the widget in the view :
 <pre>
     <section class="col-lg-9 connectedSortable ui-sortable">                                    
-        <?= \sintret\chat\ChatRoom::widget(['url'=>  \yii\helpers\Url::to(['/chat/send-chat'])]); ?>
+        <?php echo \sintret\chat\ChatRoom::widget([
+            'url' => \yii\helpers\Url::to(['/chat/send-chat']),
+            'userModel'=>  \app\models\User::className(),
+            'userField' => 'avatarImage'
+                ]); ?>
     </section>
 </pre>
 </p>
@@ -27,19 +31,11 @@ and calling the widget in the view :
 
 <pre>
 public function actionSendChat() {
-        $message = $_POST['message'];
-        if ($message) {
-            $model = new \sintret\chat\models\Chat;
-            $model->message = $message;
-            if ($model->save()) {
-                echo \sintret\chat\ChatRoom::data();
-            } else {
-                print_r($model->getErrors());
-                exit(0);
-            }
-        }
-    }
+ echo \sintret\chat\ChatRoom::sendChat($_POST);
+}
 </pre>
+attribute additional for this widget:
+url : your controller/action to post message using ajax
+userModel : your user model class name
+userField : your avatar image source, ex:avatarImage
 
-you need attribute avatarImage in model User, which avatarImage is image source. btw default image for avatar is available too
- 

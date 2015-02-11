@@ -2,7 +2,7 @@
 
 /**
  * @link https://github.com/sintret/yii2-chat-adminlte
- * @copyright Copyright (c) 2014 Andy fitria 
+ * @copyright Copyright (c) 2014 Andy fitria
  * @license MIT
  */
 
@@ -28,57 +28,83 @@ class ChatRoom extends Widget {
     ];
     public $models;
     public $url;
+    public $userModel;
+    public $userField;
+    public $model;
 
     public function init() {
+        $this->model = new Chat();
+        if ($this->userModel === NULL) {
+            $this->userModel = Yii::$app->getUser()->identityClass;
+        }
+
+        $this->model->userModel = $this->userModel;
+
+        if ($this->userField === NULL) {
+            $this->userField = 'avatarImage';
+        }
+        
+        $this->model->userField = $this->userField;
+
+
         parent::init();
     }
 
     public function run() {
         parent::init();
         ChatJs::register($this->view);
-        $view = $this->getView();
-        $output = '';
-        $output .='<div class="box box-success">
-            <div class="box-header ui-sortable-handle" style="cursor: move;">
-                <i class="fa fa-comments-o"></i>
-                <h3 class="box-title">Chat</h3>
-            </div>';
-        $output .='<div class="slimScrollDiv" style="position: relative; overflow: scroll; width: auto; height: 350px;"><div id="chat-box" class="box-body chat" style="overflow: hidden; width: auto; height: 350px;">';
-        $output .= self::data();
-        $output.='</div><div class="slimScrollBar" style="background: none repeat scroll 0% 0% rgb(0, 0, 0); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 0px; z-index: 99; right: 1px; height: 187.126px;"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 0px; background: none repeat scroll 0% 0% rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div><!-- /.chat -->
-                        <div class="box-footer">
-                            <div class="input-group">
-                                <input name="Chat[message]" id="chat_message" placeholder="Type message..." class="form-control">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-success btn-send-comment" data-url="'.$this->url.'"><i class="fa fa-plus"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                 </div><!-- /.box (chat box) -->  ';
-        return $output;
-        
+        $data = $this->data();
+        return $this->render('index', [
+                    'data' => $data,
+                    'url' => $this->url,
+                    'userModel' => $this->userModel,
+                    'userField' => $this->userField,
+        ]);
     }
-    
-    public static function data(){
+
+    public static function sendChat($post) {
+        $message = $post['message'];
+        $userField = $post['userfield'];
+        $userModel = $post['model'];
+        $model = new \sintret\chat\models\Chat;
+        $model->userModel = $userModel;
+        $model->userField = $userField;
+
+        if ($message) {
+            $model->message = $message;
+            $model->userId = Yii::$app->user->id;
+
+            if ($model->save()) {
+                echo $model->data();
+            } else {
+                print_r($model->getErrors());
+                exit(0);
+            }
+        }
+        echo $model->data();
+    }
+
+    public static function data() {
         $output .='';
         $models = Chat::records();
-        if($models)
-            foreach ($models as $model){
-                if(isset($model->user->avatarImage)){
+        if ($models)
+            foreach ($models as $model) {
+                if (isset($model->user->avatarImage)) {
                     $avatar = $model->user->avatarImage;
-                } else $avatar = Yii::getAlias("@vendor/sintret/yii2-chat-adminlte/assets/img/avatar.png");
+                } else
+                    $avatar = Yii::getAlias("@vendor/sintret/yii2-chat-adminlte/assets/img/avatar.png");
                 $output .= '<div class="item">
-                <img class="online" alt="user image" src="'.$avatar.'">
+                <img class="online" alt="user image" src="' . $avatar . '">
                 <p class="message">
                     <a class="name" href="#">
-                        <small class="text-muted pull-right" style="color:green"><i class="fa fa-clock-o"></i> '.\kartik\helpers\Enum::timeElapsed($model->updateDate).'</small>
-                        '.$model->user->username.'
+                        <small class="text-muted pull-right" style="color:green"><i class="fa fa-clock-o"></i> ' . \kartik\helpers\Enum::timeElapsed($model->updateDate) . '</small>
+                        ' . $model->user->username . '
                     </a>
-                   '.$model->message.'
+                   ' . $model->message . '
                 </p>
             </div>';
             }
-        
+
         return $output;
     }
 
