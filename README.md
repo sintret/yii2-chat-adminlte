@@ -35,7 +35,7 @@ public function actionSendChat() {
 }
 </pre>
 attribute additional for this widget:
-url : your controller/action to post message using ajax
-userModel : your user model class name
+url : your controller/action to post message using ajax <p>
+userModel : your user model class name <p>
 userField : your avatar image source, ex:avatarImage
 
