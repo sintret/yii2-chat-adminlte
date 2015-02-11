@@ -34,7 +34,7 @@ public function actionSendChat() {
  echo \sintret\chat\ChatRoom::sendChat($_POST);
 }
 </pre>
-attribute additional for this widget:
+attribute additional for this widget: <p>
 url : your controller/action to post message using ajax <p>
 userModel : your user model class name <p>
 userField : your avatar image source, ex:avatarImage
