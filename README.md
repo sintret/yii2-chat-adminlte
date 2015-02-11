@@ -37,5 +37,12 @@ public function actionSendChat() {
 attribute additional for this widget: <p>
 url : your controller/action to post message using ajax <p>
 userModel : your user model class name <p>
-userField : your avatar image source, ex:avatarImage
+userField : your avatar image source attribute in your class user model, ex:avatarImage or you can make your virtual property in your class user like this following : <p>
+public class User ....{
+
+public function getAvatarImage(){
+return Yii::getAlias($this->avatar);
+}
+}
+
 
