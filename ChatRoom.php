@@ -43,7 +43,7 @@ class ChatRoom extends Widget {
         if ($this->userField === NULL) {
             $this->userField = 'avatarImage';
         }
-        
+
         $this->model->userField = $this->userField;
 
 
@@ -63,10 +63,16 @@ class ChatRoom extends Widget {
     }
 
     public static function sendChat($post) {
-        $message = $post['message'];
-        $userField = $post['userfield'];
-        $userModel = $post['model'];
+        if (isset($post['message']))
+            $message = $post['message'];
+        if (isset($post['userfield']))
+            $userField = $post['userfield'];
+        if (isset($post['model']))
+            $userModel = $post['model'];
+        else $userModel = Yii::$app->getUser()->identityClass;
+        
         $model = new \sintret\chat\models\Chat;
+        if(isset($userModel))
         $model->userModel = $userModel;
         $model->userField = $userField;
 
@@ -85,14 +91,14 @@ class ChatRoom extends Widget {
     }
 
     public static function data() {
-        $output .='';
+        $output = '';
         $models = Chat::records();
         if ($models)
             foreach ($models as $model) {
                 if (isset($model->user->avatarImage)) {
                     $avatar = $model->user->avatarImage;
                 } else
-                    $avatar = Yii::getAlias("@vendor/sintret/yii2-chat-adminlte/assets/img/avatar.png");
+                    $avatar = Yii::$app->assetManager->publish("@vendor/sintret/yii2-chat-adminlte/assets/img/avatar.png");
                 $output .= '<div class="item">
                 <img class="online" alt="user image" src="' . $avatar . '">
                 <p class="message">
