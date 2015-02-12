@@ -69,12 +69,13 @@ class ChatRoom extends Widget {
             $userField = $post['userfield'];
         if (isset($post['model']))
             $userModel = $post['model'];
-        else $userModel = Yii::$app->getUser()->identityClass;
-        
+        else
+            $userModel = Yii::$app->getUser()->identityClass;
+
         $model = new \sintret\chat\models\Chat;
-        if(isset($userModel))
         $model->userModel = $userModel;
-        $model->userField = $userField;
+        if ($userField)
+            $model->userField = $userField;
 
         if ($message) {
             $model->message = $message;
@@ -86,32 +87,9 @@ class ChatRoom extends Widget {
                 print_r($model->getErrors());
                 exit(0);
             }
+        } else {
+            echo $model->data();
         }
-        echo $model->data();
-    }
-
-    public static function data() {
-        $output = '';
-        $models = Chat::records();
-        if ($models)
-            foreach ($models as $model) {
-                if (isset($model->user->avatarImage)) {
-                    $avatar = $model->user->avatarImage;
-                } else
-                    $avatar = Yii::$app->assetManager->publish("@vendor/sintret/yii2-chat-adminlte/assets/img/avatar.png");
-                $output .= '<div class="item">
-                <img class="online" alt="user image" src="' . $avatar . '">
-                <p class="message">
-                    <a class="name" href="#">
-                        <small class="text-muted pull-right" style="color:green"><i class="fa fa-clock-o"></i> ' . \kartik\helpers\Enum::timeElapsed($model->updateDate) . '</small>
-                        ' . $model->user->username . '
-                    </a>
-                   ' . $model->message . '
-                </p>
-            </div>';
-            }
-
-        return $output;
     }
 
 }
