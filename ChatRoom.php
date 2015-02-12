@@ -45,7 +45,7 @@ class ChatRoom extends Widget {
         }
 
         $this->model->userField = $this->userField;
-
+        Yii::$app->assetManager->publish("@vendor/sintret/yii2-chat-adminlte/assets/img/avatar.png");
 
         parent::init();
     }
