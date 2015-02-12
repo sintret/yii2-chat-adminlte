@@ -65,14 +65,16 @@ class Chat extends \yii\db\ActiveRecord {
 
     public function data() {
         $userField = $this->userField;
-        $output ='';
+        $output = '';
         $models = Chat::records();
         if ($models)
             foreach ($models as $model) {
                 if (isset($model->user->$userField)) {
                     $avatar = $model->user->$userField;
-                } else
-                    $avatar = Yii::$app->assetManager->publish("@vendor/sintret/yii2-chat-adminlte/assets/img/avatar.png");
+                } else{
+                    $avatar = Yii::$app->assetManager->getPublishedUrl("@vendor/sintret/yii2-chat-adminlte/assets/img/avatar.png");
+                }
+                    
                 $output .= '<div class="item">
                 <img class="online" alt="user image" src="' . $avatar . '">
                 <p class="message">
