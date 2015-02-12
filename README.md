@@ -31,7 +31,9 @@ and calling the widget in the view :
 
 <pre>
 public function actionSendChat() {
- echo \sintret\chat\ChatRoom::sendChat($_POST);
+    if (!empty($_POST)) {
+        echo \sintret\chat\ChatRoom::sendChat($_POST);
+    }
 }
 </pre>
 attribute additional for this widget: <p>
