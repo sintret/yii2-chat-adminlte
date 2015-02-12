@@ -53,7 +53,10 @@ class ChatRoom extends Widget {
     public function run() {
         parent::init();
         ChatJs::register($this->view);
-        $data = $this->data();
+        $model = new \sintret\chat;
+        $model->userModel = $this->userModel;
+        $model->userField = $this->userField;
+        $data = $model->data();
         return $this->render('index', [
                     'data' => $data,
                     'url' => $this->url,
