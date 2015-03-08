@@ -2,7 +2,7 @@
 
 /**
  * @link https://github.com/sintret/yii2-chat-adminlte
- * @copyright Copyright (c) 2014 Andy fitria
+ * @copyright Copyright (c) 2015 Andy fitria <sintret@gmail.com>
  * @license MIT
  */
 
@@ -31,6 +31,7 @@ class ChatRoom extends Widget {
     public $userModel;
     public $userField;
     public $model;
+    public $loadingImage;
 
     public function init() {
         $this->model = new Chat();
@@ -45,7 +46,7 @@ class ChatRoom extends Widget {
         }
 
         $this->model->userField = $this->userField;
-        Yii::$app->assetManager->publish("@vendor/sintret/yii2-chat-adminlte/assets/img/avatar.png");
+        $this->loadingImage = Yii::$app->assetManager->getPublishedUrl("@vendor/sintret/yii2-chat-adminlte/assets/img/loadingAnimation.gif");
 
         parent::init();
     }
@@ -62,6 +63,7 @@ class ChatRoom extends Widget {
                     'url' => $this->url,
                     'userModel' => $this->userModel,
                     'userField' => $this->userField,
+                    'loading' => $this->loadingImage
         ]);
     }
 
