@@ -15,7 +15,7 @@
         <div class="input-group">
             <input name="Chat[message]" id="chat_message" placeholder="Type message..." class="form-control">
             <div class="input-group-btn">
-                <button class="btn btn-success btn-send-comment" data-url="<?=$url;?>" data-model="<?=$userModel;?>" data-userfield="<?=$userField;?>"><i class="fa fa-plus"></i></button>
+                <button class="btn btn-success btn-send-comment" data-url="<?=$url;?>" data-model="<?=$userModel;?>" data-userfield="<?=$userField;?>" data-loading="<?=$loading;?>"><i class="fa fa-plus"></i></button>
             </div>
         </div>
     </div>
